@@ -1,35 +1,16 @@
 package main
 
 import (
-	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/openpsd/model-tpp/api"
 )
 
-type Todo struct {
-	Title string
-	Done  bool
-}
-
-type TodoPageData struct {
-	PageTitle string
-	Todos     []Todo
-}
-
 func main() {
-	tmpl := template.Must(template.ParseFiles("login.html"))
+	log.Println("start OpenPSD DeliveryThinking TPP reference implementation server")
+	s := api.TppHTTPServer{BankID: "mobinauten", PIN: "02011"}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		data := TodoPageData{
-			PageTitle: "AXA Pay Zahlungsbestätigung",
-			Todos: []Todo{
-				{Title: "Task 1", Done: false},
-				{Title: "Task 2", Done: true},
-				{Title: "Task 3", Done: true},
-			},
-		}
-		tmpl.Execute(w, data)
-	})
-	log.Println("start OpenPSD TPP Model reference implementation server")
-	http.ListenAndServe(":8088", nil)
+	TppAPI := api.NewMockedTppHTTPServer(s)
+	http.ListenAndServe(":8080", TppAPI)
 }
