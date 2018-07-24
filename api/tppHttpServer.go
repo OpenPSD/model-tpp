@@ -2,6 +2,7 @@ package api
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -21,10 +22,19 @@ type TppHTTPServer struct {
 }
 
 // Login function for TPP PISP Login
-func (s TppHTTPServer) Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func (s TppHTTPServer) Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	data := LoginPageData{PageTitle: "AXA Pay Bank Login", BankID: s.BankID, PIN: s.PIN}
 	//fmt.Fprint(w, "TPP server reference PISP Login\n")
 	tmpl := template.Must(template.ParseFiles("api/login.html"))
+	r.ParseForm()
+	log.Println("Form:", r.Form)
+	tmpl.Execute(w, data)
+
+}
+func (s TppHTTPServer) AxaPay(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	data := LoginPageData{PageTitle: "AXA Pay Bank Login", BankID: s.BankID, PIN: s.PIN}
+	//fmt.Fprint(w, "TPP server reference PISP Login\n")
+	tmpl := template.Must(template.ParseFiles("api/button.html"))
 	tmpl.Execute(w, data)
 
 }
@@ -38,6 +48,7 @@ func NewMockedTppHTTPServer(s TppHTTPServer) http.Handler {
 func TppHTTPServerFactory(s TppHTTPServer) http.Handler {
 	routes := httprouter.New()
 	routes.GET("/login", s.Login)
+	routes.GET("/", s.AxaPay)
 
 	return routes
 }
