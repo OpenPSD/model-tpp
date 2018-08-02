@@ -12,5 +12,8 @@ func main() {
 	s := api.TppHTTPServer{BankID: "mobinauten", PIN: "02011"}
 
 	TppAPI := api.NewMockedTppHTTPServer(s)
-	http.ListenAndServe(":8080", TppAPI)
+	err := http.ListenAndServe(":8080", TppAPI)
+	if err != nil {
+		panic(err.Error())
+	}
 }
