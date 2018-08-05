@@ -6,7 +6,7 @@
 - [x] Call `go run main.go` of PSD2-server and model-tpp on a unix shell
 - [x] Call `http://localhost:8080/test/payments/embedded` from Postman e.g. 
 
-This will exceute a Payment initiation on the PSD2 server, the PSU authentification and the OTP verification. 
+This will exceute a payment initiation on the PSD2 server, the PSU authentification and the OTP verification. 
 
 ## A successfull call will return: 
 
