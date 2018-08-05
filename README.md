@@ -1,10 +1,12 @@
 # model-tpp
 ## Model implementation for TPPs as AISP and PISP
 
-- [x] 1. Download the PSD2-server implementation 
+- [x] Download the PSD2-server implementation 
 - [x] Download the model-tpp implementation 
-- [x] 3. `go run main.go` of PSD2-server and model-tpp 
-- [x] 4. Call `http://localhost:8080/test/payments/embedded` 
+- [x] Call `go run main.go` of PSD2-server and model-tpp on a unix shell
+- [x] 4. Call `http://localhost:8080/test/payments/embedded` from Postman e.g. 
+
+This will exceute a Payment initiation on the PSD2 server, the PSU authentification and the OTP verification. 
 
 ## A successfull call will return: 
 
@@ -24,6 +26,7 @@
 	  "authoriseTransaction": {"href": "/payments/axa-pay-paymentid-1234/authorisations/123axa-auth456"}
 		}
 	  }`
+	  
 `Payment OTP verified:{
 		"scaStatus": "finalised",
 		"_links":{
