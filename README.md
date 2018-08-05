@@ -4,7 +4,7 @@
 - [x] Download the PSD2-server implementation 
 - [x] Download the model-tpp implementation 
 - [x] Call `go run main.go` of PSD2-server and model-tpp on a unix shell
-- [x] 4. Call `http://localhost:8080/test/payments/embedded` from Postman e.g. 
+- [x] Call `http://localhost:8080/test/payments/embedded` from Postman e.g. 
 
 This will exceute a Payment initiation on the PSD2 server, the PSU authentification and the OTP verification. 
 
